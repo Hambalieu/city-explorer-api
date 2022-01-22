@@ -24,7 +24,7 @@ app.use(cors());
 app.get('/weather', (request, response) => {
   let searchQuery = request.query.searchQuery;
 
-  let filteredCity = weatherData.find(cityweather => cityweather.city_name.toLowerCase() === searchQuery);
+  let filteredCity = weatherData.find(cityweather => cityweather.city_name === searchQuery);
 
   let groomedWeather = filteredCity.data.map(day => new Forecast(day));
 
