@@ -29,9 +29,9 @@ Estimate of time needed to complete: _4____
 
 Start time: __2;50___
 
-Finish time: _____
+Finish time: _4____
 
-Actual time needed to complete: _____
+Actual time needed to complete: ___3__
 
 
 
