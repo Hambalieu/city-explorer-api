@@ -23,7 +23,7 @@
 
 ## TimeStamp:
 
-Name of feature: _______________building server_________________
+Name of feature:_building server
 
 Estimate of time needed to complete: _4____
 
