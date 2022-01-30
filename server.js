@@ -1,34 +1,26 @@
 'use strict';
 
-// in our server we use require instead of import
-//importing express- because its an Express server;
-const express = require('express');
-
-//how we use express from the docs
-const app = express();
-
-
-//must import dotenv before using process.env.PORT
 require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
 
-//USE the port we want LOCALLY, and make this Deployable
-const PORT = process.env.PORT || 3002;
-
-//must import cors to use it
-var cors = require('cors');
-//must USE cors to hit server from other app;
-app.use(cors());
-
-//Require a package first install it
-const getWeather = require('./modules/weather.js');
+const weather = require('./modules/weather.js');
 const getMovies = require('./modules/movies.js');
 
-//Route
-app.get('/weather', getWeather);
+const app = express();
+app.use(cors());
+
+app.get('/weather', weatherHandler);
 app.get('/movies', getMovies);
 
+function weatherHandler(request, response) {
+  const { lat, lon } = request.query;
+  weather(lat, lon)
+    .then(summaries => response.send(summaries))
+    .catch((error) => {
+      console.error(error);
+      response.status(200).send('Sorry. Something went wrong!');
+    });
+}
 
-//listen to my server ;tell server to start listening for endpoints
-app.listen(PORT, () => console.log(`listen on port ${PORT}`));
-
-
+app.listen(process.env.PORT, () => console.log(`Server up on ${process.env.PORT}`));
